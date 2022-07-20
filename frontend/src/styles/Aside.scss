@@ -1,0 +1,107 @@
+.aside-container {
+  height: 100vh;
+  width: 25vh;
+  position: fixed;
+  margin-top: 70px;
+  background: #0d1117;
+  border-right: 2px solid #30363d;
+  .aside-title {
+    color: #ffffff;
+  }
+  .aside-search-category {
+    height: 30px;
+    margin: 1rem;
+    width: 70%;
+    background: #30363d;
+    border: 1px solid #4a515a;
+    border-radius: 3px;
+    color: #ffffff;
+    outline: none;
+    padding: 0 0 0 0.8em;
+    margin: 0;
+    &::placeholder {
+      color: #b7b7b7;
+      padding: 0.3em 0 0.3em 0.5em;
+    }
+  }
+  .aside-category-list-container {
+    height: 30%;
+    list-style: none;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    li {
+      margin: 0.5em 0;
+      width: 100%;
+      text-align: left;
+      a {
+        width: 100%;
+        text-decoration: none;
+        color: #7b7b7b;
+        font-size: 1.2em;
+        font-weight: 600;
+        // &::after {
+        //   text-align: center;
+        //   margin: 0 0.6em;
+        //   color: #ffffff;
+        // }
+        &:focus {
+          text-align: center;
+          margin: 0 0.6em;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .aside-category-pasencorefaite {
+    display: none;
+    height: 10%;
+    list-style: none;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    li {
+      margin: 0.5em 0;
+      width: 100%;
+      text-align: left;
+      a {
+        margin: 0 0.6em;
+        width: 100%;
+        text-decoration: none;
+        color: #7b7b7b;
+        font-size: 1.2em;
+        font-weight: 600;
+        // &::after {
+        //   text-align: center;
+        //   margin: 0 0.6em;
+        //   color: #ffffff;
+        // }
+        &:focus {
+          text-align: center;
+          margin: 0 0.6em;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .create-poll-button {
+    position: fixed;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-decoration: none;
+    color: #0d1117;
+    bottom: 50px;
+    left: 23px;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #b7b7b7;
+    &:hover {
+      background: #ffffff;
+    }
+  }
+}

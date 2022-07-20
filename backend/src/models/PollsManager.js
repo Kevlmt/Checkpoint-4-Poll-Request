@@ -36,6 +36,20 @@ class PollsManager extends AbstractManager {
       .then((result) => result[0]);
   }
 
+  checkAlreadyAgreed(userId, pollsId) {
+    return this.connection.query(
+      `SELECT * FROM agree WHERE users_id = ? AND polls_id = ?`,
+      [userId, pollsId]
+    );
+  }
+
+  checkAlreadyDisagreed(userId, pollsId) {
+    return this.connection.query(
+      `SELECT * FROM diagree WHERE users_id = ? AND polls_id = ?`,
+      [userId, pollsId]
+    );
+  }
+
   create(polls) {
     return this.connection.query(`INSERT INTO ${PollsManager.table} SET ?`, [
       polls,

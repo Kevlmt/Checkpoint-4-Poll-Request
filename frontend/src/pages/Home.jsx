@@ -1,36 +1,57 @@
-import Counter from "@components/Counter";
-import logo from "@assets/logo.svg";
+/* eslint-disable no-alert */
+/* eslint-disable import/no-unresolved */
+import { useLocation } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
+import Header from "@components/Header";
+import Aside from "@components/Aside";
+import Popup from "@components/Popup";
+import axios from "../services/axios";
+import "@styles/Home.scss";
+
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 export default function Home() {
+  const [categories, setCategories] = useState([]);
+  // const [polls, setPolls] = useState([]);
+  const query = useQuery();
+
+  const fetchCategories = async () => {
+    try {
+      const data = await axios.get("/categories").then((result) => result.data);
+      if (data) {
+        setCategories(data);
+      }
+      return null;
+    } catch (err) {
+      return alert(err.response.data);
+    }
+  };
+
+  // const fetchPolls = async () => {
+  //   try {
+  //     const data = await axios.get("/polls").then((result) => result.data);
+  //     if (data) {
+  //       setPolls(data);
+  //     }
+  //     return null;
+  //   } catch (err) {
+  //     return alert(err.response.data);
+  //   }
+  // };
+
+  useEffect(() => {
+    fetchCategories();
+    // fetchPolls();
+  }, []);
+
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <div className="page">
+      {query.get("popup") && <Popup popup={query.get("popup")} />}
+      <Header />
+      <Aside categories={categories} />
+    </div>
   );
 }

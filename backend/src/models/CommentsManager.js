@@ -9,10 +9,10 @@ class CommentsManager extends AbstractManager {
     ]);
   }
 
-  findAllByPolls(pollsId) {
+  findByPolls(pollsId) {
     return this.connection
       .query(
-        `SELECT c.id, c.text, c.date, c.polls_id, c.users_id author_id, u.pseudo FROM ${CommentsManager.table} c LEFT JOIN users u ON u.id = c.users_id WHERE polls_id = ?`,
+        `SELECT c.id, c.text, c.date, c.polls_id, c.users_id author_id, u.pseudo, u.imgLink author_imgLink FROM ${CommentsManager.table} c LEFT JOIN users u ON u.id = c.users_id WHERE polls_id = ?`,
         [pollsId]
       )
       .then((result) => result[0]);

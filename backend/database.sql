@@ -60,7 +60,6 @@ INSERT INTO
   categories (name)
 VALUES
   ("Animals"),
-  ("Gastronomy"),
   ("Random"),
   ("Politics"),
   ("Advices");

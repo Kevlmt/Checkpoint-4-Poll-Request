@@ -1,15 +1,17 @@
 .aside-container {
-  height: 100vh;
-  width: 25vh;
-  position: fixed;
-  margin-top: 70px;
+  height: 100%;
+  width: 14%;
+  // padding-top: 70px;
   background: #0d1117;
   border-right: 2px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .aside-title {
     color: #ffffff;
   }
   .aside-search-category {
-    height: 30px;
+    height: 10%;
     margin: 1rem;
     width: 70%;
     background: #30363d;
@@ -26,32 +28,40 @@
   }
   .aside-category-list-container {
     height: 30%;
+    width: 100%;
     list-style: none;
-    padding: 1.5em;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    margin: 2em 0;
+
     li {
-      margin: 0.5em 0;
+      margin: 0.6em 0;
       width: 100%;
       text-align: left;
-      a {
+
+      .categories-button {
         width: 100%;
+        margin: 0 0.8em;
         text-decoration: none;
         color: #7b7b7b;
         font-size: 1.2em;
         font-weight: 600;
-        // &::after {
-        //   text-align: center;
-        //   margin: 0 0.6em;
-        //   color: #ffffff;
-        // }
-        &:focus {
-          text-align: center;
-          margin: 0 0.6em;
+        &:hover {
           color: #ffffff;
         }
+      }
+
+      .categories-button-active {
+        text-align: center;
+        font-size: 1.2em;
+        width: 100%;
+        margin: 0 1.5em;
+        font-weight: 600;
+        text-decoration: none;
+        color: #ffffff;
       }
     }
   }
@@ -59,49 +69,58 @@
     display: none;
     height: 10%;
     list-style: none;
-    padding: 1.5em;
+    // padding: 1.5em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    width: 100%;
+
     li {
       margin: 0.5em 0;
       width: 100%;
       text-align: left;
-      a {
+
+      .categories-button {
         margin: 0 0.6em;
         width: 100%;
         text-decoration: none;
         color: #7b7b7b;
         font-size: 1.2em;
         font-weight: 600;
-        // &::after {
-        //   text-align: center;
-        //   margin: 0 0.6em;
-        //   color: #ffffff;
-        // }
-        &:focus {
-          text-align: center;
-          margin: 0 0.6em;
-          color: #ffffff;
-        }
+      }
+
+      .categories-button-active {
+        text-align: center;
+        margin: 0 0.6em;
+        font-size: 1.2em;
+        width: 100%;
+        font-weight: 600;
+        text-decoration: none;
+        color: #ffffff;
       }
     }
   }
-  .create-poll-button {
-    position: fixed;
-    font-size: 1.2em;
-    font-weight: 600;
-    text-decoration: none;
-    color: #0d1117;
-    bottom: 50px;
-    left: 23px;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 10px;
-    background-color: #b7b7b7;
-    &:hover {
-      background: #ffffff;
+  .create-poll-div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .create-poll-button {
+      width: 70%;
+      // height: ;
+      font-size: 1.2em;
+      font-weight: 600;
+      text-decoration: none;
+      color: #0d1117;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background-color: #b7b7b7;
+      &:hover {
+        background: #ffffff;
+      }
     }
   }
 }

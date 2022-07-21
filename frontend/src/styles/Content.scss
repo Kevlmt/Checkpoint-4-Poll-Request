@@ -1,0 +1,40 @@
+.content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  background: rgb(13, 14, 27);
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 20, 1) 0%,
+    rgba(21, 22, 34, 1) 60%,
+    rgba(30, 31, 41, 1) 100%
+  );
+  .polls-list-container {
+    width: 100%;
+    margin: 0;
+    .polls-ul-container {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      overflow-y: auto;
+      .polls-li-container {
+        width: 90%;
+        padding: 1.2em 0;
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        border-bottom: 1px solid #30363d;
+      }
+    }
+  }
+  .comment-list-container {
+    width: 60%;
+    border: 1px solid black;
+    margin: 0 1em 0 1.5em;
+  }
+}

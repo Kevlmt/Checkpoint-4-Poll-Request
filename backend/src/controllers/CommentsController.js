@@ -1,6 +1,20 @@
+/* eslint-disable camelcase */
 const models = require("../models");
 
 class CommentsController {
+  static findByPolls = async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    try {
+      const comments = await models.comments.findByPolls(id);
+      if (!comments) {
+        return res.status(404).send("no comments found");
+      }
+      return res.status(200).send(comments);
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  };
+
   static newComment = (req, res) => {
     const comments = req.body;
 

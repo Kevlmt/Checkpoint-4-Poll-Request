@@ -10,7 +10,7 @@ const formInitialState = {
   email: "",
 };
 
-const loginForm = (state, action) => {
+const registerForm = (state, action) => {
   switch (action.type) {
     case "UPDATE_EMAIL":
       return { ...state, email: action.payload };
@@ -25,7 +25,7 @@ const loginForm = (state, action) => {
 export default function Register() {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const [formData, dispatch] = useReducer(loginForm, formInitialState);
+  const [formData, dispatch] = useReducer(registerForm, formInitialState);
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function Register() {
 
     try {
       const userData = await axios
-        .post("users/login", userCredit, {
+        .post("users/", userCredit, {
           withCredentials: true,
         })
         .then((response) => response.data);

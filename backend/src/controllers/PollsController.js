@@ -53,15 +53,15 @@ class PollsController {
   };
 
   static readById = async (req, res) => {
-    const pollsId = parseInt(req.params.id, 10);
+    const polls_id = parseInt(req.params.id, 10);
     try {
-      const [[polls]] = await models.polls.browseById(pollsId);
+      const [[polls]] = await models.polls.browseById(polls_id);
       if (!polls) {
         res.status(404).send("polls not found");
       }
-      polls.agree = await models.polls.browseUsersAgreeId(pollsId);
-      polls.disagree = await models.polls.browseUsersDisagreeId(pollsId);
-      polls.comments = await models.comments.findAllByPolls(pollsId);
+      polls.agree = await models.polls.browseUsersAgreeId(polls_id);
+      polls.disagree = await models.polls.browseUsersDisagreeId(polls_id);
+      polls.comments = await models.comments.findAllByPolls(polls_id);
       return res.status(200).send(polls);
     } catch (err) {
       return res.status(500).send(err.message);
@@ -86,23 +86,23 @@ class PollsController {
 
   static agree = async (req, res) => {
     const { userId } = req;
-    const pollsId = req.body;
+    const { polls_id } = req.body;
     try {
-      const isAlreadyAgreed = await models.polls.checkAlreadyAgreed(
+      const [isAlreadyAgreed] = await models.polls.checkAlreadyAgreed(
         userId,
-        pollsId
+        polls_id
       );
-      if (isAlreadyAgreed) {
+      if (isAlreadyAgreed.length) {
         return res.status(404).send("Polls already voted");
       }
-      const isAlreadyDisagreed = await models.polls.checkAlreadydisagreed(
+      const [isAlreadyDisagreed] = await models.polls.checkAlreadyDisagreed(
         userId,
-        pollsId
+        polls_id
       );
-      if (isAlreadyDisagreed) {
+      if (isAlreadyDisagreed.length) {
         return res.status(404).send("Poll already voted");
       }
-      const [agree] = models.polls.agree(userId, pollsId);
+      const agree = models.polls.agree(userId, polls_id);
       if (!agree) {
         return res.status(404).send("error in agreed");
       }
@@ -114,23 +114,24 @@ class PollsController {
 
   static disagree = async (req, res) => {
     const { userId } = req;
-    const pollsId = req.body;
+    const { polls_id } = req.body;
     try {
-      const isAlreadyDisagreed = await models.polls.checkAlreadydisagreed(
+      const [isAlreadyDisagreed] = await models.polls.checkAlreadyDisagreed(
         userId,
-        pollsId
+        polls_id
       );
-      const isAlreadyAgreed = await models.polls.checkAlreadyAgreed(
-        userId,
-        pollsId
-      );
-      if (isAlreadyAgreed) {
-        return res.status(404).send("Polls already voted");
-      }
-      if (isAlreadyDisagreed) {
+      if (isAlreadyDisagreed.length) {
         return res.status(404).send("Poll already voted");
       }
-      const [disagree] = models.polls.agree(userId, pollsId);
+      const [isAlreadyAgreed] = await models.polls.checkAlreadyAgreed(
+        userId,
+        polls_id
+      );
+      if (isAlreadyAgreed.length) {
+        return res.status(404).send("Polls already voted");
+      }
+
+      const disagree = models.polls.disagree(userId, polls_id);
       if (!disagree) {
         return res.status(404).send("error in disagreed");
       }

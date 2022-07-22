@@ -100,6 +100,7 @@ export default function Profil() {
             </div>
             <div className="profil-stats-container">
               <h3>Stats:</h3>
+              <h4>j'ai pas eu le temps.</h4>
             </div>
             <button type="button" onClick={handleLogout}>
               Logout

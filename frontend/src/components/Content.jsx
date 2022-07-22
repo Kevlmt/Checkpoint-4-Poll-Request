@@ -241,7 +241,6 @@ export default function Content({
               />
             </li>
           ));
-
       case "Recent":
         return polls
           .filter((poll) => {

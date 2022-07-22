@@ -76,11 +76,13 @@ export default function Popup({
             <h1>Post a poll</h1>
             <form onSubmit={postPoll}>
               <div>
-                <input
+                <textarea
                   className="input"
                   type="text"
                   placeholder="Type here ..."
                   required
+                  cols="30"
+                  rows="10"
                   autoComplete="on"
                   value={pollText}
                   onChange={(e) => setPollText(e.target.value)}
@@ -107,12 +109,14 @@ export default function Popup({
         return (
           <div className="create-comment-container">
             <h1>Post a comment</h1>
-            <form onSubmit={postComment}>
-              <input
+            <form className="formadd-comment" onSubmit={postComment}>
+              <textarea
                 className="input"
                 type="text"
                 placeholder="Type here ..."
                 required
+                cols="30"
+                rows="10"
                 autoComplete="on"
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}

@@ -63,10 +63,10 @@ export default function PopupProfil({ fetchUserInfo, userInfo }) {
         <NavLink to="/profil" className="popup-close-button">
           X
         </NavLink>
-        <div>
+        <div className="popup-modify-1">
           <h1>Edit your Profil</h1>
           <form onSubmit={modifySubmit}>
-            <div>
+            <div className="popup-modify">
               <input
                 className="input"
                 type="text"

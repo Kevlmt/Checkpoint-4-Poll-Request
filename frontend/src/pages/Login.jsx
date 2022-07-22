@@ -49,11 +49,11 @@ export default function Login() {
       return alert(err.response.data);
     }
   };
-
   return (
     <div className="login-page">
       <section className="login-container">
         <form onSubmit={loginSubmit}>
+          <h1>Connect to your account</h1>
           <div>
             <input
               className="input"
@@ -79,7 +79,7 @@ export default function Login() {
             />
           </div>
           <NavLink to="/register" className="login-page-navlink-register">
-            <p>S'inscrire</p>
+            <p>Register</p>
           </NavLink>
           <button className="login-page-submit-button" type="submit">
             Connection

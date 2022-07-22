@@ -38,7 +38,7 @@ class FileController {
         req.pictureData = {
           imgLink: req.file.filename,
         };
-        req.body = { ...req.pictureData, ...req.body };
+        req.body = { ...req.pictureData, ...JSON.parse(req.body.newUser) };
         return next();
       });
     }

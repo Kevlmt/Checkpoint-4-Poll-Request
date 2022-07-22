@@ -5,9 +5,8 @@ import { NavLink } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import "@styles/Aside.scss";
 
-export default function Aside({ categories, query, currentCategory }) {
+export default function Aside({ categories, query, pollsId, currentCategory }) {
   const { user } = useContext(UserContext);
-
   return (
     <section className="aside-container">
       <h1 className="aside-title">Categories</h1>
@@ -57,51 +56,54 @@ export default function Aside({ categories, query, currentCategory }) {
             </li>
           ))}
       </ul>
-      <ul className="aside-category-pasencorefaite">
-        <li>
-          <NavLink
-            to="/?category=Favorites"
-            className={
-              query.get("category") === `Favorites`
-                ? "categories-button-active"
-                : "categories-button"
-            }
-          >
-            Favorites
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/?category=Voted"
-            className={
-              query.get("category") === `Voted`
-                ? "categories-button-active"
-                : "categories-button"
-            }
-          >
-            Voted
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/?category=Followed"
-            className={
-              query.get("category") === `Followed`
-                ? "categories-button-active"
-                : "categories-button"
-            }
-          >
-            Followed
-          </NavLink>
-        </li>
-      </ul>
+      {user && (
+        <ul className="aside-category-pasencorefaite">
+          <li>
+            <NavLink
+              to="/?category=Discover"
+              className={
+                query.get("category") === `Discover`
+                  ? "categories-button-active"
+                  : "categories-button"
+              }
+            >
+              Discover
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/?category=Voted"
+              className={
+                query.get("category") === `Voted`
+                  ? "categories-button-active"
+                  : "categories-button"
+              }
+            >
+              Voted
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/?category=MyPolls"
+              className={
+                query.get("category") === `MyPolls`
+                  ? "categories-button-active"
+                  : "categories-button"
+              }
+            >
+              My Polls
+            </NavLink>
+          </li>
+        </ul>
+      )}
+
       <div className="create-poll-div">
         {user && (
           <NavLink
             to={
-              query.get("category")
-                ? `/?category=${currentCategory}&popup=createPoll`
-                : "/?popup=createPoll"
+              pollsId !== null
+                ? `/?category=${currentCategory}&poll=${pollsId}&popup=createPoll`
+                : `/?category=${currentCategory}&popup=createPoll`
             }
             className="create-poll-button"
           >

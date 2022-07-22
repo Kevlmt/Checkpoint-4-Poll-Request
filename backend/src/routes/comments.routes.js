@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/:id", CommentsController.findByPolls);
 router.post(
-  "/",
+  "/:pollsId",
   UsersController.isUserConnected,
   CommentsController.newComment
 );

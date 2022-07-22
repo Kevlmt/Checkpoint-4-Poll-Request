@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
@@ -5,7 +6,7 @@ import UserContext from "../contexts/UserContext";
 
 import "@styles/Header.scss";
 
-export default function Header() {
+export default function Header({ searchValue, setSearchValue }) {
   const { user } = useContext(UserContext);
   return (
     <header className="header">
@@ -14,11 +15,15 @@ export default function Header() {
           type="text"
           placeholder="Search poll ..."
           className="header-input"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
-      <h1 className="header-title">Poll Request</h1>
+      <NavLink to="/" className="header-title">
+        Poll Request
+      </NavLink>
       {user ? (
-        <NavLink to="/Profil" className="header-navlink-profil">
+        <NavLink to="/profil" className="header-navlink-profil">
           <div className="header-div">
             {user.imgLink ? (
               <img

@@ -68,7 +68,7 @@ INSERT INTO
   users (email, firstname, lastname, pseudo, password)
 VALUES
   (
-    "kevinlamant@gmail.com",
+    "kevin@gmail.com",
     "kevin",
     "lastname",
     "kékédu28",
@@ -101,22 +101,11 @@ VALUES
     "centvint",
     "20 100",
     "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+  ),
+  (
+    "jerem@gmail.com",
+    "jerem",
+    "tropfort",
+    "JeremLeCrack",
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
   );
-
-INSERT INTO
-  polls (text, users_id, categories_id)
-VALUES
-  ("test", 2, 1),
-  ("test2", 2, 1);
-
-INSERT INTO
-  agree (users_id, polls_id)
-VALUES
-  (1, 1),
-  (2, 1);
-
-INSERT INTO
-  comments (text, polls_id, users_id)
-VALUES
-  ("this is a comment", 1, 1),
-  ("this is a second comment", 1, 2)

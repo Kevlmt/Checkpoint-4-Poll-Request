@@ -1,34 +1,35 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-alert */
-import { useEffect, useState } from "react";
-import axios from "@services/axios";
-import formatDate from "@services/dateFormat";
+import { NavLink } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import CommentsCard from "./CommentsCard";
 
-export default function Comments({ pollsId }) {
-  const [comments, setComments] = useState(null);
+export default function Comments({
+  pollsId,
+  currentCategory,
+  fetchComments,
+  comments,
+}) {
+  const { user } = useContext(UserContext);
 
-  const fetchComments = async () => {
-    try {
-      const commentsList = await axios
-        .get(`/comments/${pollsId}`)
-        .then((result) => {
-          const fetchedData = result.data;
-          fetchedData.forEach((comment) => {
-            const date = formatDate(comment.date);
-            // eslint-disable-next-line no-param-reassign
-            comment.date = date;
-            return comment;
-          });
-          return fetchedData;
-        });
-      if (commentsList) {
-        setComments(commentsList);
+  const sortComments = (array) => {
+    const results = [];
+    array.forEach((comment) => {
+      const lastIndex = results.length - 1;
+      let lastComment = null;
+      if (results.length) {
+        lastComment = results[lastIndex][results[lastIndex].length - 1];
       }
-      return null;
-    } catch (err) {
-      return alert(err.reponse.data);
-    }
+
+      if (results.length === 0 || lastComment.author_id !== comment.author_id) {
+        results.push([comment]);
+      } else if (lastComment.author_id === comment.author_id) {
+        results[lastIndex].push(comment);
+      }
+    });
+    return results;
   };
 
   useEffect(() => {
@@ -37,7 +38,26 @@ export default function Comments({ pollsId }) {
 
   return (
     <section className="comment-list-container">
-      {comments && comments.map((comment) => <h1>{comment.text}</h1>)}
+      <h1>You can debat here</h1>
+      {comments && !comments.length ? <h3>No comments yet...</h3> : null}
+      <ul className="comment-list">
+        {comments &&
+          sortComments(comments).map((groupComments, indexG) =>
+            groupComments.map((comment) => (
+              <CommentsCard key={comment.id} comment={comment} index={indexG} />
+            ))
+          )}
+      </ul>
+      <div className="create-comment-div">
+        {user && (
+          <NavLink
+            to={`/?category=${currentCategory}&popup=comment&poll=${pollsId}`}
+            className="create-comment-button"
+          >
+            Comment
+          </NavLink>
+        )}
+      </div>
     </section>
   );
 }

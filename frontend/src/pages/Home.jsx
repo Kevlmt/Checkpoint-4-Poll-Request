@@ -17,7 +17,10 @@ function useQuery() {
 
 export default function Home() {
   const [categories, setCategories] = useState();
+  const [comments, setComments] = useState(null);
   const [polls, setPolls] = useState();
+  const [searchValue, setSearchValue] = useState("");
+
   const query = useQuery();
 
   const fetchCategories = async () => {
@@ -31,7 +34,6 @@ export default function Home() {
       return alert(err.response.data);
     }
   };
-
   const fetchPolls = async () => {
     try {
       const dataFetched = await axios.get("/polls").then((result) => {
@@ -45,11 +47,34 @@ export default function Home() {
         return newPolls;
       });
       if (dataFetched) {
-        setPolls(dataFetched);
+        return setPolls(dataFetched);
       }
       return null;
     } catch (err) {
       return alert(err.response.data);
+    }
+  };
+
+  const fetchComments = async () => {
+    try {
+      const commentsList = await axios
+        .get(`/comments/${query.get("poll")}`)
+        .then((result) => {
+          const fetchedData = result.data;
+          fetchedData.forEach((comment) => {
+            const date = formatDate(comment.date);
+            // eslint-disable-next-line no-param-reassign
+            comment.date = date;
+            return comment;
+          });
+          return fetchedData;
+        });
+      if (commentsList) {
+        return setComments(commentsList);
+      }
+      return null;
+    } catch (err) {
+      return alert(err.reponse.data);
     }
   };
 
@@ -67,21 +92,28 @@ export default function Home() {
           query={query}
           categories={categories}
           fetchPolls={fetchPolls}
+          pollsId={query.get("poll")}
+          fetchComments={fetchComments}
+          comment={comments}
         />
       )}
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="content">
         {" "}
         <Aside
           categories={categories}
           query={query}
           currentCategory={query.get("category")}
+          pollsId={query.get("poll")}
         />
         <Content
           polls={polls}
           query={query}
           currentCategory={query.get("category")}
           fetchPolls={fetchPolls}
+          fetchComments={fetchComments}
+          comments={comments}
+          searchValue={searchValue}
         />
       </div>
     </div>

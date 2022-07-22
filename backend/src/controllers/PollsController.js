@@ -78,6 +78,10 @@ class PollsController {
       if (!newPolls) {
         return res.status(404).send("error in posting polls");
       }
+      const agree = await models.polls.agree(req.userId, newPolls[0].insertId);
+      if (!agree) {
+        return res.status(404).send("error in posting");
+      }
       return res.sendStatus(201);
     } catch (err) {
       return res.status(500).send(err.message);
@@ -102,7 +106,7 @@ class PollsController {
       if (isAlreadyDisagreed.length) {
         return res.status(404).send("Poll already voted");
       }
-      const agree = models.polls.agree(userId, polls_id);
+      const agree = await models.polls.agree(userId, polls_id);
       if (!agree) {
         return res.status(404).send("error in agreed");
       }
@@ -131,7 +135,7 @@ class PollsController {
         return res.status(404).send("Polls already voted");
       }
 
-      const disagree = models.polls.disagree(userId, polls_id);
+      const disagree = await models.polls.disagree(userId, polls_id);
       if (!disagree) {
         return res.status(404).send("error in disagreed");
       }

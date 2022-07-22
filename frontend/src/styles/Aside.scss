@@ -11,7 +11,7 @@
     color: #ffffff;
   }
   .aside-search-category {
-    height: 10%;
+    height: 13%;
     margin: 1rem;
     width: 70%;
     background: #30363d;
@@ -35,7 +35,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin: 2em 0;
+    margin: 3em 0 4em 0;
 
     li {
       margin: 0.6em 0;
@@ -88,6 +88,9 @@
         color: #7b7b7b;
         font-size: 1.2em;
         font-weight: 600;
+        &:hover {
+          color: #ffffff;
+        }
       }
 
       .categories-button-active {
@@ -116,10 +119,10 @@
       color: #0d1117;
       cursor: pointer;
       padding: 0.5rem;
-      border-radius: 10px;
-      background-color: #b7b7b7;
+      border-radius: 3px;
+      background: #ffffff;
       &:hover {
-        background: #ffffff;
+        background-color: #e5e5e5;
       }
     }
   }

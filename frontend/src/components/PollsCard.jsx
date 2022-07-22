@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "@services/axios";
 import UserContext from "../contexts/UserContext";
@@ -16,15 +16,12 @@ export default function PollsCard({ poll, currentCategory, fetchPolls }) {
       polls_id: poll.id,
     };
     try {
-      const agree = await axios
+      await axios
         .post("/polls/agree", agreeData, {
           withCredentials: true,
         })
-        .then((response) => response.data);
-      if (agree) {
-        return fetchPolls();
-      }
-      return fetchPolls();
+        .then(() => fetchPolls());
+      return null;
     } catch (err) {
       return alert(err.response.data);
     }
@@ -35,18 +32,28 @@ export default function PollsCard({ poll, currentCategory, fetchPolls }) {
       polls_id: poll.id,
     };
     try {
-      const agree = await axios
+      await axios
         .post("/polls/disagree", disagreeData, {
           withCredentials: true,
         })
-        .then((response) => response.data);
-      if (agree) {
-        return fetchPolls();
-      }
-      return fetchPolls();
+        .then(() => fetchPolls());
+      return null;
     } catch (err) {
       return alert(err.response.data);
     }
+  };
+
+  const handleAgreeDisplay = () => {
+    if (user) {
+      if (poll.usersAgree.includes(user.id)) {
+        return <p>You Agreed</p>;
+      }
+      if (poll.usersDisagree.includes(user.id)) {
+        return <p>You Disagreed</p>;
+      }
+      return null;
+    }
+    return null;
   };
 
   const handleButtonDisplay = () => {
@@ -60,13 +67,13 @@ export default function PollsCard({ poll, currentCategory, fetchPolls }) {
             <p className="agree-count">
               {(poll.usersAgree.length /
                 (poll.usersAgree.length + poll.usersDisagree.length)) *
-                100}{" "}
+                100}
               % Agree
             </p>
             <p className="disagree-count">
               {(poll.usersDisagree.length /
                 (poll.usersAgree.length + poll.usersDisagree.length)) *
-                100}{" "}
+                100}
               % Disagree
             </p>
           </div>
@@ -90,18 +97,9 @@ export default function PollsCard({ poll, currentCategory, fetchPolls }) {
     return null;
   };
 
-  const handleAgreeDisplay = () => {
-    if (user) {
-      if (poll.usersAgree.includes(user.id)) {
-        return <p>You Agreed</p>;
-      }
-      if (poll.usersDisagree.includes(user.id)) {
-        return <p>You Disagreed</p>;
-      }
-      return null;
-    }
-    return null;
-  };
+  useEffect(() => {
+    handleButtonDisplay();
+  }, [handleAgree, handleDisagree]);
 
   return (
     <NavLink
@@ -109,19 +107,23 @@ export default function PollsCard({ poll, currentCategory, fetchPolls }) {
       className="polls-card-container"
     >
       <div className="polls-avatar-div">
-        <img
-          src={
-            poll.author_imgLink
-              ? `${import.meta.env.VITE_BACKEND_ASSETS_URL}/images/users/${
-                  poll.author_imgLInk
-                }`
-              : `${
-                  import.meta.env.VITE_BACKEND_ASSETS_URL
-                }/images/users/avatar.png`
-          }
-          alt="avatar"
-          className="avatarImg"
-        />
+        {poll?.author_imgLink ? (
+          <img
+            src={`${import.meta.env.VITE_BACKEND_ASSETS_URL}/images/users/${
+              poll.author_imgLink
+            }`}
+            alt="avatar"
+            className="avatarImg"
+          />
+        ) : (
+          <img
+            src={`${
+              import.meta.env.VITE_BACKEND_ASSETS_URL
+            }/images/users/avatar.png`}
+            alt="avatar"
+            className="avatarImg"
+          />
+        )}
       </div>
       <div className="polls-info-container">
         <div className="polls-author-div">

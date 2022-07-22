@@ -54,4 +54,13 @@ code {
 
 button {
   font-size: calc(10px + 2vmin);
+  /* background-color: #ffffff; */
+}
+
+.input-file {
+  color: #ffffff;
+}
+
+h1 {
+  color: #ffffff;
 }

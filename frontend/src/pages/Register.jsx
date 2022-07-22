@@ -1,12 +1,14 @@
 /* eslint-disable import/no-unresolved */
-import { useReducer, useContext } from "react";
+import { useReducer, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import UserContext from "../contexts/UserContext";
 import axios from "../services/axios";
-import "@styles/Login.scss";
+import "@styles/Register.scss";
 
 const formInitialState = {
   password: "",
+  firstname: "",
+  lastname: "",
+  pseudo: "",
   email: "",
 };
 
@@ -16,6 +18,12 @@ const registerForm = (state, action) => {
       return { ...state, email: action.payload };
     case "UPDATE_PASSWORD":
       return { ...state, password: action.payload };
+    case "UPDATE_FIRSTNAME":
+      return { ...state, firstname: action.payload };
+    case "UPDATE_LASTNAME":
+      return { ...state, lastname: action.payload };
+    case "UPDATE_PSEUDO":
+      return { ...state, pseudo: action.payload };
     case "RESET_FORM":
       return { ...formInitialState };
     default:
@@ -23,37 +31,61 @@ const registerForm = (state, action) => {
   }
 };
 export default function Register() {
-  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [formData, dispatch] = useReducer(registerForm, formInitialState);
+  const [file, setFile] = useState(null);
 
-  const loginSubmit = async (e) => {
+  const registerSubmit = async (e) => {
     e.preventDefault();
     const userCredit = {
       password: formData.password,
       email: formData.email,
+      lastname: formData.lastname,
+      firstname: formData.firstname,
+      pseudo: formData.pseudo,
     };
-
+    if (!file) {
+      try {
+        const userData = await axios
+          .post("users/", userCredit, {
+            withCredentials: true,
+          })
+          .then((response) => response.data);
+        // eslint-disable-next-line no-restricted-syntax
+        if (userData) {
+          dispatch({ type: "RESET_FORM" });
+          return navigate("/login");
+        }
+        return null;
+      } catch (err) {
+        return alert(err.response.data);
+      }
+    }
+    const user = new FormData();
+    user.append("file", file);
+    user.append("newUser", JSON.stringify(userCredit));
     try {
       const userData = await axios
-        .post("users/", userCredit, {
+        .post("users/?file=users", user, {
           withCredentials: true,
         })
         .then((response) => response.data);
       // eslint-disable-next-line no-restricted-syntax
-      setUser(userData);
-      // alert("Successfully logged in");
-      dispatch({ type: "RESET_FORM" });
-      return navigate("/");
+      if (userData) {
+        dispatch({ type: "RESET_FORM" });
+        return navigate("/login");
+      }
+      return null;
     } catch (err) {
       return alert(err.response.data);
     }
   };
 
   return (
-    <div className="login-page">
-      <section className="login-container">
-        <form onSubmit={loginSubmit}>
+    <div className="register-page">
+      <section className="register-container">
+        <form onSubmit={registerSubmit}>
+          <h1>Register an account</h1>
           <div>
             <input
               className="input"
@@ -77,12 +109,50 @@ export default function Register() {
                 dispatch({ type: "UPDATE_PASSWORD", payload: e.target.value })
               }
             />
+            <input
+              className="input"
+              type="text"
+              placeholder="Enter your firstname"
+              required
+              autoComplete="on"
+              value={formData.firstname}
+              onChange={(e) =>
+                dispatch({ type: "UPDATE_FIRSTNAME", payload: e.target.value })
+              }
+            />
+            <input
+              className="input"
+              type="text"
+              placeholder="Enter your lastname"
+              required
+              autoComplete="on"
+              value={formData.lastname}
+              onChange={(e) =>
+                dispatch({ type: "UPDATE_LASTNAME", payload: e.target.value })
+              }
+            />
+            <input
+              className="input"
+              type="text"
+              placeholder="Enter your pseudo"
+              required
+              autoComplete="on"
+              value={formData.pseudo}
+              onChange={(e) =>
+                dispatch({ type: "UPDATE_PSEUDO", payload: e.target.value })
+              }
+            />
+            <input
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              className="input-file"
+            />
           </div>
-          <NavLink to="/register" className="login-page-navlink-register">
-            <p>S'inscrire</p>
+          <NavLink to="/login" className="register-page-navlink-register">
+            <p>Connection</p>
           </NavLink>
-          <button className="login-page-submit-button" type="submit">
-            Connection
+          <button className="register-page-submit-button" type="submit">
+            Register
           </button>
         </form>
       </section>

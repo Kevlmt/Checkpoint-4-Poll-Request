@@ -12,7 +12,7 @@
   );
   .polls-list-container {
     width: 100%;
-    margin: 0;
+    margin: 0.5em 0;
     .polls-ul-container {
       list-style: none;
       padding: 0;
@@ -22,8 +22,29 @@
       align-items: center;
       height: 100%;
       overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 2px;
+        background: #555f6d;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #dcdcdc;
+        border-radius: 2px;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #8a8a8a;
+      }
       .polls-li-container {
         width: 90%;
+        max-width: 900px;
         padding: 1.2em 0;
         display: flex;
         justify-content: center;
@@ -34,7 +55,156 @@
   }
   .comment-list-container {
     width: 60%;
-    border: 1px solid black;
     margin: 0 1em 0 1.5em;
+    padding: 0 1em 0 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .comment-list {
+      padding: 1.5em;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 70%;
+      width: 100%;
+      overflow-y: auto;
+      border-left: 1.5px solid #30363d;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 2px;
+        background: #555f6d;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #dcdcdc;
+        border-radius: 2px;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #8a8a8a;
+      }
+      .comment-card-container-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 1em;
+        align-items: center;
+        .comment-light {
+          padding: 1em;
+          position: relative;
+          background-color: #586886;
+          width: 80%;
+          text-align: left;
+          border-radius: 2px;
+          align-self: flex-end;
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-bottom: 15px solid #586886;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            bottom: 0;
+            left: -15px;
+          }
+          .comment-text {
+            margin: 0;
+          }
+        }
+        .comment-info-div {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row-reverse;
+          width: 100%;
+          .comment-date {
+            font-size: 0.85em;
+            font-weight: 300;
+            text-align: right;
+            margin: 0;
+          }
+          .comment-author {
+            margin: 0.5em;
+          }
+        }
+      }
+      .comment-card-container-right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 1em;
+        .comment-dark {
+          position: relative;
+          background-color: #172643;
+          width: 80%;
+          padding: 1em;
+          text-align: left;
+          border-radius: 2px;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-bottom: 15px solid #172643;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            bottom: 0;
+            right: -15px;
+          }
+          .comment-text {
+            margin: 0;
+          }
+        }
+        .comment-info-div {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          width: 100%;
+          .comment-date {
+            font-size: 0.85em;
+            font-weight: 300;
+            text-align: right;
+            margin: 0;
+          }
+          .comment-author {
+            margin: 0.5em;
+          }
+        }
+      }
+    }
+    .create-comment-div {
+      width: 100%;
+      height: 10%;
+      padding: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1.5px solid #30363d;
+      .create-comment-button {
+        width: 50%;
+        font-size: 1.2em;
+        font-weight: 600;
+        text-decoration: none;
+        color: #0d1117;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 3px;
+        background: #ffffff;
+        &:hover {
+          background-color: #e5e5e5;
+        }
+      }
+    }
   }
 }

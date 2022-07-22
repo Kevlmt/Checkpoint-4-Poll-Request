@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 import { useState } from "react";
@@ -9,14 +10,14 @@ export default function Popup({
   popup,
   categories,
   currentCategory,
-  query,
+  pollsId,
   fetchPolls,
+  fetchComments,
 }) {
   const [pollText, setPollText] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
 
   const [commentText, setCommentText] = useState(null);
-  const [pollId, setPollId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -37,9 +38,29 @@ export default function Popup({
         setPollText("");
         setCategoryId("");
         alert("poll posted");
-        return navigate(
-          query.get("category") ? `/?category=${currentCategory}` : "/"
-        );
+        return navigate(`/?category=${currentCategory}`);
+      }
+      return null;
+    } catch (err) {
+      return alert(err.response.data);
+    }
+  };
+
+  const postComment = async (e) => {
+    e.preventDefault();
+    const comment = {
+      text: commentText,
+    };
+    try {
+      const newComment = await axios
+        .post(`comments/${pollsId}`, comment, {
+          withCredentials: true,
+        })
+        .then((response) => response.data);
+      if (newComment) {
+        fetchComments();
+        setCommentText("");
+        return navigate(`/?category=${currentCategory}&poll=${pollsId}`);
       }
       return null;
     } catch (err) {
@@ -86,20 +107,24 @@ export default function Popup({
         return (
           <div className="create-comment-container">
             <h1>Post a comment</h1>
-            <form onSubmit={postPoll}>
-              <div>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Type here ..."
-                  required
-                  autoComplete="on"
-                  value={pollText}
-                  onChange={(e) => setPollText(e.target.value)}
-                />
-              </div>
+            <form onSubmit={postComment}>
+              <input
+                className="input"
+                type="text"
+                placeholder="Type here ..."
+                required
+                autoComplete="on"
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+              />
               <button type="submit">Comment</button>
             </form>
+          </div>
+        );
+      case "profil":
+        return (
+          <div>
+            <p>bite</p>
           </div>
         );
       default:
@@ -111,7 +136,11 @@ export default function Popup({
     <section className="popup-container">
       <div className="popup-div">
         <NavLink
-          to={query.get("category") ? `/?category=${currentCategory}` : "/"}
+          to={
+            pollsId !== null
+              ? `/?category=${currentCategory}&poll=${pollsId}`
+              : `/?category=${currentCategory}`
+          }
           className="popup-close-button"
         >
           X

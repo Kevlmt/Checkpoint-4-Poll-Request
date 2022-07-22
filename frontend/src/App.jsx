@@ -4,12 +4,13 @@ import { useState } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
 import Home from "@pages/Home";
+import Profil from "@pages/Profil";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   return (
     <div className="App">
       {/* eslint-disable-next-line */}
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/profil" element={<Profil />} />
           </Routes>
         </Router>
       </UserContext.Provider>

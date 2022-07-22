@@ -17,7 +17,7 @@ class CommentsController {
 
   static newComment = (req, res) => {
     const comments = req.body;
-
+    comments.polls_id = parseInt(req.params.pollsId, 10);
     if (!comments.text || !comments.polls_id) {
       return res.sendStatus(400);
     }

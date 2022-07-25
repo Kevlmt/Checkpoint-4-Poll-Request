@@ -23,7 +23,8 @@
     margin: 0;
     &::placeholder {
       color: #b7b7b7;
-      padding: 0.3em 0 0.3em 0.5em;
+      // padding: 0.3em 0 0.3em 0.5em;
+      text-align: center;
     }
   }
   .aside-category-list-container {

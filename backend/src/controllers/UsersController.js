@@ -22,6 +22,7 @@ class UsersController {
             lastname: user[0].lastname,
             email: user[0].email,
             pseudo: user[0].pseudo,
+            role: user[0].role,
           },
           process.env.ACCESS_JWT_SECRET,
           { expiresIn: process.env.ACCESS_JWT_EXPIRESIN }

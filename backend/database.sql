@@ -12,7 +12,8 @@ CREATE TABLE
     firstname VARCHAR(255) NOT NULL,
     imgLink VARCHAR(255) NULL,
     pseudo VARCHAR(80) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    role ENUM ("USER", "ADMIN") NOT NULL
   );
 
 CREATE TABLE
@@ -37,23 +38,23 @@ CREATE TABLE
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     polls_id INT NOT NULL,
     users_id INT NOT NULL,
-    CONSTRAINT fk_polls_comments FOREIGN KEY (polls_id) REFERENCES polls(id) ON DELETE CASCADE
+    CONSTRAINT fk_polls_comments FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 CREATE TABLE
   agree (
     users_id INT NOT NULL,
     polls_id INT NOT NULL,
-    CONSTRAINT fk_users_agree FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT fk_polls_agree FOREIGN KEY (polls_id) REFERENCES polls(id) ON DELETE CASCADE
+    CONSTRAINT fk_users_agree FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_polls_agree FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 CREATE TABLE
   disagree (
     users_id INT NOT NULL,
     polls_id INT NOT NULL,
-    CONSTRAINT fk_users_disagree FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT fk_polls_disagree FOREIGN KEY (polls_id) REFERENCES polls(id) ON DELETE CASCADE
+    CONSTRAINT fk_users_disagree FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_polls_disagree FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 INSERT INTO
@@ -65,47 +66,60 @@ VALUES
   ("Advices");
 
 INSERT INTO
-  users (email, firstname, lastname, pseudo, password)
+  users (
+    email,
+    firstname,
+    lastname,
+    pseudo,
+    password,
+    role
+  )
 VALUES
   (
     "kevin@gmail.com",
     "kevin",
     "lastname",
     "kékédu28",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "ADMIN"
   ),
   (
     "anis@gmail.com",
     "anis",
     "sakura",
     "sakuradu28",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "USER"
   ),
   (
     "thibault@gmail.com",
     "thibault",
     "hexagone",
     "tibononow",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "USER"
   ),
   (
     "enzo@gmail.com",
     "enzo",
     "leplubo",
     "zozo le boss",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "USER"
   ),
   (
     "vincent@gmail.com",
     "vincent",
     "centvint",
     "20 100",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "USER"
   ),
   (
     "jerem@gmail.com",
     "jerem",
     "tropfort",
     "JeremLeCrack",
-    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI"
+    "$argon2id$v=19$m=4096,t=3,p=1$ft3DHyANZViLAXJM0hZ3IQ$Iht9Kb3IHGzrvJnVghxhSbLzlyRq5tRx+TH7QkKtGXI",
+    "USER"
   );

@@ -13,7 +13,7 @@ CREATE TABLE
     imgLink VARCHAR(255) NULL,
     pseudo VARCHAR(80) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role ENUM ("USER", "ADMIN") NOT NULL
+    role ENUM ("USER", "ADMIN") DEFAULT "USER"
   );
 
 CREATE TABLE
@@ -27,8 +27,8 @@ CREATE TABLE
     id INT PRIMARY KEY AUTO_INCREMENT,
     text TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    users_id INT NOT NULL,
-    categories_id INT NOT NULL
+    userId INT NOT NULL,
+    categoryId INT NOT NULL
   );
 
 CREATE TABLE
@@ -36,25 +36,25 @@ CREATE TABLE
     id INT PRIMARY KEY AUTO_INCREMENT,
     text TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    polls_id INT NOT NULL,
-    users_id INT NOT NULL,
-    CONSTRAINT fk_polls_comments FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
+    pollId INT NOT NULL,
+    userId INT NOT NULL,
+    CONSTRAINT fk_polls_comments FOREIGN KEY (pollId) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 CREATE TABLE
-  agree (
-    users_id INT NOT NULL,
-    polls_id INT NOT NULL,
-    CONSTRAINT fk_users_agree FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT fk_polls_agree FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
+  agrees (
+    userId INT NOT NULL,
+    pollId INT NOT NULL,
+    CONSTRAINT fk_users_agree FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_polls_agree FOREIGN KEY (pollId) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 CREATE TABLE
-  disagree (
-    users_id INT NOT NULL,
-    polls_id INT NOT NULL,
-    CONSTRAINT fk_users_disagree FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT fk_polls_disagree FOREIGN KEY (polls_id) REFERENCES polls (id) ON DELETE CASCADE
+  disagrees (
+    userId INT NOT NULL,
+    pollId INT NOT NULL,
+    CONSTRAINT fk_users_disagree FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_polls_disagree FOREIGN KEY (pollId) REFERENCES polls (id) ON DELETE CASCADE
   );
 
 INSERT INTO

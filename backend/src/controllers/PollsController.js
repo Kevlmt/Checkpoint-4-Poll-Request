@@ -73,14 +73,14 @@ class PollsController {
     try {
       const newPolls = await models.polls.create({
         ...polls,
-        users_id: req.userId,
+        userId: req.userId,
       });
       if (!newPolls) {
         return res.status(404).send("error in posting polls");
       }
       const agree = await models.polls.agree(req.userId, newPolls[0].insertId);
       if (!agree) {
-        return res.status(404).send("error in posting");
+        return res.status(404).send("Error in posting");
       }
       return res.sendStatus(201);
     } catch (err) {
@@ -132,14 +132,32 @@ class PollsController {
         polls_id
       );
       if (isAlreadyAgreed.length) {
-        return res.status(404).send("Polls already voted");
+        return res.status(404).send("Polls already voted.");
       }
 
       const disagree = await models.polls.disagree(userId, polls_id);
       if (!disagree) {
-        return res.status(404).send("error in disagreed");
+        return res.status(404).send("Error in disagreed.");
       }
-      return res.status(200).send("disagreed successfully");
+      return res.status(200).send("Disagreed successfully.");
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  };
+
+  static delete = async (req, res) => {
+    const { userId, userRole } = req;
+    const pollId = parseInt(req.params.id, 10);
+    try {
+      const poll = await models.polls.browseById(pollId);
+      if (!poll) {
+        return res.status(404).send("Poll doesn't exist.");
+      }
+      if (userId !== poll.userId || userRole !== "ADMIN") {
+        return res.status(403).send("You can't delete this poll");
+      }
+      await models.poll.delete(pollId);
+      return res.status(200).send("Poll deleted.");
     } catch (err) {
       return res.status(500).send(err.message);
     }

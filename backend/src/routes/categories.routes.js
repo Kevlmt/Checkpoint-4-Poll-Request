@@ -1,9 +1,27 @@
 const express = require("express");
 
-const { CategoriesController } = require("../controllers");
+const { CategoriesController, AuthController } = require("../controllers");
 
 const router = express.Router();
 
 router.get("/", CategoriesController.browseAll);
+router.post(
+  "/",
+  AuthController.isUserConnected,
+  AuthController.isUserAdmin,
+  CategoriesController.create
+);
+router.put(
+  "/:id",
+  AuthController.isUserConnected,
+  AuthController.isUserAdmin,
+  CategoriesController.edit
+);
+router.delete(
+  "/:id",
+  AuthController.isUserConnected,
+  AuthController.isUserAdmin,
+  CategoriesController.delete
+);
 
 module.exports = router;

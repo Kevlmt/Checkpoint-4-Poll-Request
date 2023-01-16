@@ -1,13 +1,13 @@
 const express = require("express");
 
-const { CommentsController, UsersController } = require("../controllers");
+const { CommentsController, AuthController } = require("../controllers");
 
 const router = express.Router();
 
 router.get("/:id", CommentsController.findByPolls);
 router.post(
   "/:pollsId",
-  UsersController.isUserConnected,
+  AuthController.isUserConnected,
   CommentsController.newComment
 );
 

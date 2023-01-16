@@ -29,7 +29,7 @@ class UsersManager extends AbstractManager {
 
   async findByEmail(email) {
     const user = await this.connection.query(
-      `SELECT id, firstname, lastname, email, pseudo, imgLink FROM ${UsersManager.table} WHERE email = ?`,
+      `SELECT id, firstname, lastname, email, pseudo, imgLink, role FROM ${UsersManager.table} WHERE email = ?`,
       [email]
     );
     return user[0];
@@ -42,7 +42,10 @@ class UsersManager extends AbstractManager {
         [id]
       );
     }
-    return false;
+    return this.connection.query(
+      `SELECT firstname, lastname, email, pseudo , imgLink FROM ${UsersManager.table} WHERE id = ?`,
+      [id]
+    );
   }
 
   insert(user) {
@@ -63,20 +66,6 @@ class UsersManager extends AbstractManager {
       .query(`SELECT imgLink FROM ${UsersManager.table} WHERE id = ?`, [userId])
       .then(([result]) => result[0]);
   }
-
-  // fetchLike(usersId) {
-  //   return this.connection.query(
-  //     `SELECT idea_id FROM users_vote WHERE users_id = ?`,
-  //     [usersId]
-  //   );
-  // }
-
-  // fetchFollow(usersId) {
-  //   return this.connection.query(
-  //     `SELECT project_id FROM users_project WHERE users_id = ?`,
-  //     [usersId]
-  //   );
-  // }
 }
 
 module.exports = UsersManager;

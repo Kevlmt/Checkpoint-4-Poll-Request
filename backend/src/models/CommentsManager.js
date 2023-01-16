@@ -9,13 +9,34 @@ class CommentsManager extends AbstractManager {
     ]);
   }
 
+  findById(commentId) {
+    return this.connection.query(
+      `SELECT FROM ${CommentsManager.table} WHERE id = ?`,
+      commentId
+    );
+  }
+
   findByPolls(pollsId) {
     return this.connection
       .query(
-        `SELECT c.id, c.text, c.date, c.polls_id, c.users_id author_id, u.pseudo, u.imgLink author_imgLink FROM ${CommentsManager.table} c LEFT JOIN users u ON u.id = c.users_id WHERE polls_id = ?`,
+        `SELECT c.id, c.text, c.date, c.polls_id, c.userId authorId, u.pseudo, u.imgLink authorImgLink FROM ${CommentsManager.table} c LEFT JOIN users u ON u.id = c.userId WHERE pollId = ?`,
         [pollsId]
       )
       .then((result) => result[0]);
+  }
+
+  editComment(comment, commentId) {
+    return this.connection.query(
+      `UPDATE ${CommentsManager.table} SET ? WHERE id = ?`,
+      [comment, commentId]
+    );
+  }
+
+  deleteComment(commentId) {
+    return this.connection.query(
+      `DELETE FROM ${CommentsManager.table} WHERE id = ?`,
+      commentId
+    );
   }
 }
 

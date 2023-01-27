@@ -1,0 +1,86 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$blue: #33ace0;
+$red: #ff3c3c;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.login-page {
+  background: $header-background;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15%;
+  .login-page-title {
+    padding-top: 5rem;
+    margin: 0;
+    font-size: 2.5rem;
+  }
+
+  .login-page-form {
+    background-color: $aside-background;
+    border: 2px solid $input;
+    border-radius: 3px;
+    width: 80%;
+    max-width: 700px;
+    padding: 2rem 0.5rem;
+
+    .login-page-form-title {
+      color: $font-white;
+    }
+
+    .login-page-input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .login-page-input {
+        border: 1px solid $border;
+        background: $input;
+        border-radius: 3px;
+        width: 70%;
+        max-width: 400px;
+        padding-left: 0.5rem;
+        height: 1.5rem;
+        margin: 0 0 1rem 0;
+        color: $font-white;
+        &::placeholder {
+          text-align: center;
+        }
+      }
+    }
+    .login-page-navlink {
+      text-decoration: none;
+      p {
+        color: $font-white;
+        &:hover {
+          color: $green;
+        }
+      }
+    }
+    .login-page-submit-button {
+      border-radius: $radius;
+      border: none;
+      width: auto;
+      padding: 0.5rem 1rem;
+      background-color: $button-background;
+      color: $green;
+      cursor: pointer;
+      &:hover {
+        background-color: $button-background-hover;
+        color: $green-hover;
+      }
+    }
+  }
+}

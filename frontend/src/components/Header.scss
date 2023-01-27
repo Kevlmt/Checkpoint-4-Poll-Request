@@ -1,0 +1,172 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$blue: #33ace0;
+$red: #ff3c3c;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header-title-container {
+    background-color: $header-background;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .header-title {
+      text-decoration: none;
+      font-size: 1.7rem;
+      color: $font-white;
+      padding: 0.2rem;
+      margin: 0;
+    }
+
+    .navButton {
+      pointer-events: all;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: 350ms;
+      z-index: 25;
+      user-select: none;
+
+      &:hover {
+        cursor: pointer;
+        color: $green;
+      }
+    }
+    .logout-button {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      top: 5px;
+      right: 5px;
+      height: 42px;
+      background-color: $header-background;
+      border: none;
+      color: $font-white;
+    }
+
+    // .registerButton {
+    //   display: none;
+
+    //   &:hover {
+    //     cursor: pointer;
+    //   }
+    // }
+
+    .rotate90 {
+      transform: rotate(-90deg);
+    }
+
+    .menuLogoBars {
+      width: 30px;
+      height: 3px;
+      border-radius: 3px;
+      background-color: $font-white;
+      margin-top: 3px;
+      margin-bottom: 3px;
+      position: relative;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .cross {
+      transform: rotate(45deg);
+      margin: 0;
+      position: absolute;
+    }
+
+    .crossInverted {
+      transform: rotate(-45deg);
+      margin: 0;
+      position: absolute;
+    }
+  }
+  .header-nav-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 70px;
+    background-color: $aside-background;
+    .header-nav-navlink {
+      text-decoration: none;
+      color: $font-white;
+      font-weight: 500;
+      width: 20%;
+      &:hover {
+        color: $green;
+        background-color: #141a23;
+      }
+      &.active {
+        transition: ease-in;
+        color: $green;
+        // background-color: #141a23;
+        border-bottom: 2px solid $green;
+      }
+      .header-nav-button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+      }
+    }
+    .admin {
+      display: none;
+    }
+  }
+}
+
+.comment-page-navback {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-decoration: none;
+  color: $font-white;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 42px;
+  height: 42px;
+  border-radius: $radius;
+  background: none;
+  border: none;
+  &:hover {
+    color: $green;
+  }
+  .comment-page-back {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 960px) {
+}

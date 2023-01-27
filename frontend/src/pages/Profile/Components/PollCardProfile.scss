@@ -1,0 +1,78 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #3ac561;
+$green-hover: #27ff64;
+$blue: #33ace0;
+$red: #c21d1d;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.pollcard-profile-container {
+  width: 100%;
+  padding: 1rem 0;
+  .pollcard-profile-navlink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: $font-white;
+    width: 100%;
+
+    .pollcard-profile-content {
+      width: 70%;
+      text-align: left;
+      padding-left: 0.5rem;
+
+      .pollcard-profile-date {
+        margin: 0;
+        color: $font-white2;
+        font-size: 0.8rem;
+
+        .pollcard-profile-edit-container {
+          .pollcard-profile-edit-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $background;
+            color: $blue;
+            border: none;
+            border-radius: $radius;
+            cursor: pointer;
+            // padding: 0.3rem;
+            // font-size: 0.9rem;
+          }
+          .pollcard-profile-delete-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $background;
+            color: $red;
+            border: none;
+            border-radius: $radius;
+            cursor: pointer;
+            // padding: 0.3rem;
+            // font-size: 0.9rem;
+          }
+        }
+      }
+
+      .pollcard-profile-text {
+        background-color: $comment;
+        border-radius: $radius;
+        border: 1px solid $border;
+        padding: 0.5rem;
+        text-align: left;
+        margin: 0.5rem 0 0 0;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 code {
@@ -53,4 +54,13 @@ code {
 
 button {
   font-size: calc(10px + 2vmin);
+  /* background-color: #ffffff; */
+}
+
+.input-file {
+  color: #ffffff;
+}
+
+h1 {
+  color: #ffffff;
 }

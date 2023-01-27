@@ -1,0 +1,55 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$blue: #33ace0;
+$red: #ff3c3c;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.comment-card-container {
+  color: $font-white;
+  width: 100%;
+  margin: 0.5rem 0;
+  // border-bottom: 1px solid #1c232c;
+  .comment-card-info-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+
+    a {
+      text-decoration: none;
+      color: $font-white;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      color: $unselected;
+    }
+  }
+  div {
+    .comment-card-text {
+      width: 100%;
+      text-align: left;
+      margin: 0.2rem 0;
+      font-weight: 300;
+      box-sizing: border-box;
+      padding: 0rem 0.8rem;
+    }
+  }
+}
+
+.last-comment {
+  border: none;
+}

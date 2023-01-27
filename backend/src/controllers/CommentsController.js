@@ -17,12 +17,12 @@ class CommentsController {
 
   static newComment = (req, res) => {
     const comments = req.body;
-    comments.polls_id = parseInt(req.params.pollsId, 10);
-    if (!comments.text || !comments.polls_id) {
+    comments.pollId = parseInt(req.params.pollId, 10);
+    if (!comments.text || !comments.pollId) {
       return res.sendStatus(400);
     }
     models.comments
-      .insert({ ...comments, users_id: req.userId })
+      .insert({ ...comments, userId: req.userId })
       .then(([result]) => {
         return res.status(201).send({ ...comments, id: result.insertId });
       })
@@ -61,6 +61,12 @@ class CommentsController {
   static deleteComment = async (req, res) => {
     const commentId = parseInt(req.params.id, 10);
     try {
+      const comment = await models.comments.findById(commentId);
+      if (req.userId !== comment.userId || req.userRole !== "ADMIN") {
+        return res
+          .status(403)
+          .send("You can't delete comment that you don't own");
+      }
       await models.comment.deleteComment(commentId);
       return res.status(200).send("comment deleted successfully");
     } catch (err) {

@@ -38,13 +38,27 @@ class UsersManager extends AbstractManager {
   async find(id, userId) {
     if (userId === id) {
       return this.connection.query(
-        `SELECT id, firstname, lastname, email, pseudo , imgLink FROM ${UsersManager.table} WHERE id = ?`,
+        `SELECT id, firstname, lastname, email, pseudo , imgLink, role FROM ${UsersManager.table} WHERE id = ?`,
         [id]
       );
     }
     return this.connection.query(
       `SELECT firstname, lastname, email, pseudo , imgLink FROM ${UsersManager.table} WHERE id = ?`,
       [id]
+    );
+  }
+
+  async findById(id) {
+    const user = await this.connection.query(
+      `SELECT id, firstname, lastname, email, pseudo, role FROM ${UsersManager.table} WHERE id = ?`,
+      [id]
+    );
+    return user[0];
+  }
+
+  findAll() {
+    return this.connection.query(
+      `SELECT id, firstname, lastname, pseudo, imgLink, email FROM ${UsersManager.table}`
     );
   }
 

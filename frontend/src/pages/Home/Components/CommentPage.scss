@@ -1,0 +1,190 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$green-dark: #389753;
+$blue: #33ace0;
+$red: #ff3c3c;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.pollcard-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 0.5rem;
+}
+
+.comment-page {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .comment-page-poll-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid $border;
+    color: $font-white;
+    padding: 0.5rem 0 0 0;
+
+    .comment-page-poll-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .comment-page-author-info {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        // width: 100%;
+        text-decoration: none;
+        color: $font-white;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          a {
+            text-decoration: none;
+            color: $font-white;
+            font-weight: 600;
+          }
+        }
+        .poll-date {
+          font-size: 0.8rem;
+          color: $unselected;
+        }
+      }
+
+      .follow-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        background-color: $button-background;
+        color: $green;
+        border: none;
+        border-radius: $radius;
+        padding: 0.3rem;
+        cursor: pointer;
+      }
+      .followed {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        gap: 0.2rem;
+        color: $green-dark;
+        margin: 0;
+      }
+    }
+
+    .comment-page-poll-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .comment-page-poll-text {
+        width: 100%;
+        background-color: $comment;
+        border-radius: $radius;
+        border: 1px solid $border;
+        text-align: left;
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .pollcard-agree-stats-container {
+        display: flex;
+        justify-content: space-between;
+        width: 96%;
+
+        p {
+          margin: 0;
+          font-size: 0.8rem;
+        }
+        .agree-count {
+          color: $blue;
+        }
+        .disagree-count {
+          color: $red;
+        }
+        .agreed-text {
+          color: $unselected;
+        }
+      }
+      div {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        p {
+          color: $font-white2;
+          font-size: 0.8rem;
+          margin: 1rem 0 0 0;
+        }
+      }
+
+      .pollcard-agree-button-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .agree-button,
+        .disagree-button {
+          background: $button-background;
+          border: none;
+          font-size: 0.8rem;
+          cursor: pointer;
+          padding: 0.2rem 0.5rem;
+          border-radius: $radius;
+          margin: 0.2rem;
+        }
+
+        .agree-button {
+          color: $blue;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .agree {
+            padding-left: 0.5rem;
+          }
+        }
+
+        .disagree-button {
+          color: $red;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .disagree {
+            padding-left: 0.5rem;
+          }
+        }
+      }
+      .comment-page-poll-comment-count {
+        width: 100%;
+
+        p {
+          margin-bottom: 0.2rem;
+        }
+      }
+    }
+  }
+}

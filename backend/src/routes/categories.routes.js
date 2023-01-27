@@ -4,7 +4,7 @@ const { CategoriesController, AuthController } = require("../controllers");
 
 const router = express.Router();
 
-router.get("/", CategoriesController.browseAll);
+router.get("/", AuthController.isUserConnected, CategoriesController.browseAll);
 router.post(
   "/",
   AuthController.isUserConnected,

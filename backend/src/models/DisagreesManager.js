@@ -5,7 +5,7 @@ class DisagreesManager extends AbstractManager {
 
   browseUsersDisagreeId(pollsId) {
     return this.connection
-      .query(`SELECT userId FROM disagree WHERE pollId = ?`, pollsId)
+      .query(`SELECT userId FROM disagrees WHERE pollId = ?`, pollsId)
       .then((result) => result[0]);
   }
 

@@ -1,0 +1,115 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$green-dark: #389753;
+$blue: #33ace0;
+$red: #ff3c3c;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.profile-image {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 0.5rem;
+}
+
+.profile-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .profile-card-container {
+    width: 90%;
+    margin-top: 1rem;
+    // border: 1px solid $border;
+    border-radius: $radius;
+    background-color: $aside-background;
+    position: relative;
+    display: flex;
+    justify-content: row;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: $font-white;
+      }
+    }
+    .follow-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      background-color: $button-background;
+      color: $green;
+      border: none;
+      border-radius: $radius;
+      padding: 0.3rem;
+      cursor: pointer;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+    }
+    .followed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      gap: 0.2rem;
+      padding: 0.3rem;
+      color: $green-dark;
+      margin: 0;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+    }
+    .edit-profile-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      text-decoration: none;
+      color: $font-white2;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      h2 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .profile-title {
+    font-size: 1.3rem;
+    margin: 0.5rem 0 0.8rem 0;
+    width: 80%;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid $border;
+  }
+  .nopolls-title {
+    font-size: 1.1rem;
+    color: $font-white2;
+  }
+}

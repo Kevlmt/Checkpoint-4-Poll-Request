@@ -23,7 +23,7 @@ const formatDate = (date) => {
     day: day,
     hour: hour[0],
     fullYMD: splitDate[0],
-    fullDMY: `${day}-${month}-${year}`,
+    fullDMY: `${day}/${month}/${year}`,
   };
 };
 

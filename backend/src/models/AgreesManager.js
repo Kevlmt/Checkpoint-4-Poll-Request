@@ -5,7 +5,7 @@ class AgreesManager extends AbstractManager {
 
   browseUsersAgreeId(pollsId) {
     return this.connection
-      .query(`SELECT userId FROM agree WHERE pollId = ?`, pollsId)
+      .query(`SELECT userId FROM agrees WHERE pollId = ?`, pollsId)
       .then((result) => result[0]);
   }
 
@@ -15,6 +15,13 @@ class AgreesManager extends AbstractManager {
       [userId, pollsId]
     );
   }
+
+  // findAgreesCount(pollId) {
+  //   return this.connection.query(
+  //     `SELECT COUNT(*) as agreesLength FROM ${AgreesManager.table} WHERE pollId = ?`,
+  //     pollId
+  //   );
+  // }
 
   agree(userId, pollId) {
     return this.connection.query(

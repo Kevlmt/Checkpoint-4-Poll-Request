@@ -57,13 +57,21 @@ CREATE TABLE
     CONSTRAINT fk_polls_disagree FOREIGN KEY (pollId) REFERENCES polls (id) ON DELETE CASCADE
   );
 
+CREATE TABLE
+  follows (
+    followerId INT NOT NULL,
+    followedId INT NOT NULL,
+    CONSTRAINT fk_follower_user FOREIGN KEY (followerId) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_followed_user FOREIGN KEY (followedId) REFERENCES users (id) ON DELETE CASCADE
+  );
+
 INSERT INTO
   categories (name)
 VALUES
-  ("Animals"),
+  ("Animal"),
   ("Random"),
-  ("Politics"),
-  ("Advices");
+  ("Politic"),
+  ("Advice");
 
 INSERT INTO
   users (

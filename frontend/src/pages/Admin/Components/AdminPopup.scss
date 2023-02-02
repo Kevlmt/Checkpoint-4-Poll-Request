@@ -3,9 +3,11 @@ $aside-background: #0d1117;
 $background: #0d131c;
 $background2: rgba(0, 0, 0, 0);
 $green: #4cf47b;
-$green-hover: #27ff64;
+$green-hover: #00ff48;
 $blue: #33ace0;
+$blue2: #12b8ff;
 $red: #ff3c3c;
+$red2: #ff0a0a;
 $unselected: #7b7b7b;
 $font-white: #ffffff;
 $font-white2: #b7b7b7;
@@ -15,13 +17,3 @@ $comment: #30363d;
 $button-background: #161b22;
 $button-background-hover: #12161b;
 $radius: 3px;
-
-.home-page {
-  background: $background;
-}
-
-@media screen and (min-width: 960px) {
-  .home-content {
-    display: flex;
-  }
-}

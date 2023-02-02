@@ -1,6 +1,7 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import { useContext } from "react";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
@@ -8,6 +9,7 @@ import { BsShieldLock } from "react-icons/bs";
 import { ImArrowLeft2 } from "react-icons/im";
 import { TbMessages } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
+import axios from "@services/axios";
 import UserContext from "../contexts/UserContext";
 
 export default function Header({
@@ -16,11 +18,20 @@ export default function Header({
   currentCategory,
   poll,
   fetchPolls,
-  handleLogout,
 }) {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("/users/logout", { withCredentials: true }).then(() => {
+        setUser(null);
+        return navigate("/");
+      });
+    } catch (err) {
+      alert(err.reponse.data);
+    }
+  };
 
   return (
     <header className="header">
@@ -59,19 +70,14 @@ export default function Header({
           </button>
         )}
         <h1 className="header-title">
-          <NavLink to="/" className="header-title">
+          <NavLink to="/home?category=Recent" className="header-title">
             Poll Request
           </NavLink>
         </h1>
-        {location.pathname === `/profile/${user.id}` && (
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="logout-button"
-          >
-            <MdLogout size={30} />
-          </button>
-        )}
+
+        <button type="button" onClick={handleLogout} className="logout-button">
+          <MdLogout size={30} />
+        </button>
       </div>
       <div className="header-nav-container">
         <NavLink
@@ -100,7 +106,10 @@ export default function Header({
           </div>
         </NavLink>
         {user?.role === "ADMIN" && (
-          <NavLink to="/admin" className="header-nav-navlink admin">
+          <NavLink
+            to="/admin?content=categories"
+            className="header-nav-navlink admin"
+          >
             <div className="header-nav-button-container">
               <BsShieldLock size={35} />
               Admin
@@ -108,6 +117,14 @@ export default function Header({
           </NavLink>
         )}
       </div>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="logout-button-desktop"
+      >
+        <MdLogout size={30} />
+        Logout
+      </button>
     </header>
   );
 }

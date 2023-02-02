@@ -48,6 +48,16 @@ class UsersController {
     }
   };
 
+  static readAllAdmin = async (req, res) => {
+    try {
+      const [userList] = await models.users.findAllAdmin();
+      if (!userList) return res.status(404).send("Users not found");
+      return res.status(200).send(userList);
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  };
+
   static edit = async (req, res) => {
     const user = req.body;
     user.id = parseInt(req.params.id, 10);
@@ -96,17 +106,22 @@ class UsersController {
     }
   };
 
-  // static delete = (req, res) => {
-  //   models.users
-  //     .delete(req.params.id)
-  //     .then(() => {
-  //       res.sendStatus(204);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       res.sendStatus(500);
-  //     });
-  // };
+  static delete = async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    try {
+      const userToDelete = await models.users.findById(userId);
+      if (!userToDelete) {
+        return res.status(404).send("user to delete no found");
+      }
+      if (userToDelete.role === "ADMIN") {
+        return res.status(403).send("You cant delete admin account");
+      }
+      await models.users.delete(userId);
+      return res.status(200).send("user deleted");
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  };
 }
 
 module.exports = UsersController;

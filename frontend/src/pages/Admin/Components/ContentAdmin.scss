@@ -1,0 +1,130 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #27ff64;
+$green-dark: #389753;
+$blue: #33ace0;
+$blue2: #12b8ff;
+$red: #ff3c3c;
+$red2: #ff0a0a;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.admin-content-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $font-white;
+
+  .categories-content-container {
+    width: 80%;
+    height: 80%;
+    background-color: $header-background;
+    border-radius: $radius;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .admin-input-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 0 0 1rem 0;
+
+      .admin-search-input {
+        width: 50%;
+        border: 1px solid $border;
+        background: $input;
+        border-radius: 3px;
+        padding-left: 0.5rem;
+        height: 1.5rem;
+        color: $font-white;
+
+        &::placeholder {
+          text-align: center;
+        }
+        &:focus {
+          outline: none !important;
+        }
+      }
+      .admin-add-button {
+        border: none;
+        background-color: $button-background-hover;
+        color: $green;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: $radius;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $comment;
+          color: $green-hover;
+        }
+      }
+    }
+
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      height: 100%;
+
+      .category-card {
+        display: flex;
+        width: 40%;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: $radius;
+        padding: 0 1rem;
+        &:hover {
+          background-color: $comment;
+        }
+
+        .admin-button-edit {
+          font-size: 1rem;
+          border: none;
+          background: none;
+          color: $font-white2;
+          padding: 0 1rem;
+          color: $blue;
+          text-decoration: none;
+          &:hover {
+            color: $blue2;
+            cursor: pointer;
+          }
+        }
+
+        .admin-button-delete {
+          font-size: 1rem;
+          border: none;
+          background: none;
+          color: $font-white2;
+          padding: 0 1rem;
+          color: $red;
+          text-decoration: none;
+          &:hover {
+            color: $red2;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .users-content-container {
+  }
+}

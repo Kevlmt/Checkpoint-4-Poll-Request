@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { NavLink, useNavigate } from "react-router-dom";
-import { ImWarning } from "react-icons/im";
 import { RiCloseLine } from "react-icons/ri";
 import axios from "../../../services/axios";
 import "./DeletePopup.scss";
@@ -29,7 +28,6 @@ export default function DeletePopup({ userId, query, fetchPolls }) {
           <RiCloseLine size={40} />
         </NavLink>
         <div className="delete-poll-container">
-          <ImWarning size={40} color="red" />
           <h1>Do you want to delete this Poll ?</h1>
           <button
             type="button"

@@ -50,7 +50,7 @@ class UsersManager extends AbstractManager {
 
   async findById(id) {
     const user = await this.connection.query(
-      `SELECT id, firstname, lastname, email, pseudo, role FROM ${UsersManager.table} WHERE id = ?`,
+      `SELECT * FROM ${UsersManager.table} WHERE id = ?`,
       [id]
     );
     return user[0];
@@ -59,6 +59,18 @@ class UsersManager extends AbstractManager {
   findAll() {
     return this.connection.query(
       `SELECT id, firstname, lastname, pseudo, imgLink, email FROM ${UsersManager.table}`
+    );
+  }
+
+  findAllChat() {
+    return this.connection.query(
+      `SELECT u.id, u.firstname, u.lastname, u.pseudo, u.imgLink, u.email,m.text lastMessageSent, m.date lastMessageDateSent, me.text lastMessageReceived, me.date lastMessageDateReceived FROM ${UsersManager.table} u LEFT JOIN messages m ON m.fromId = u.id OR m.toId = u.id`
+    );
+  }
+
+  findAllAdmin() {
+    return this.connection.query(
+      `SELECT * FROM ${UsersManager.table} WHERE role = "USER"`
     );
   }
 
@@ -72,6 +84,13 @@ class UsersManager extends AbstractManager {
     return this.connection.query(
       `UPDATE ${UsersManager.table} SET ? WHERE id = ?`,
       [user, user.id]
+    );
+  }
+
+  delete(userId) {
+    return this.connection.query(
+      `DELETE FROM ${UsersManager.table} WHERE id = ?`,
+      userId
     );
   }
 

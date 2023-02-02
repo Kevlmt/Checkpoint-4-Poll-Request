@@ -65,6 +65,17 @@ CREATE TABLE
     CONSTRAINT fk_followed_user FOREIGN KEY (followedId) REFERENCES users (id) ON DELETE CASCADE
   );
 
+CREATE TABLE
+  messages (
+    -- id INT PRIMARY KEY AUTO_INCREMENT,
+    toId INT NOT NULL,
+    fromId INT NOT NULL,
+    text TEXT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_to_user FOREIGN KEY (toId) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_from_user FOREIGN KEY (fromId) REFERENCES users (id) ON DELETE CASCADE
+  );
+
 INSERT INTO
   categories (name)
 VALUES

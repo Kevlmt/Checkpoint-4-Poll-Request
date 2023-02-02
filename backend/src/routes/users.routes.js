@@ -22,6 +22,12 @@ router.get(
 );
 router.get("/logout", AuthController.logout);
 router.get("/refreshToken", AuthController.refreshToken);
+router.get(
+  "/admin",
+  AuthController.isUserConnected,
+  AuthController.isUserAdmin,
+  UsersController.readAllAdmin
+);
 router.get("/:id", AuthController.isUserConnected, UsersController.read);
 router.get("/", AuthController.isUserConnected, UsersController.readAll);
 router.put(
@@ -30,6 +36,12 @@ router.put(
   AuthController.isUserAllowedToModify,
   FilesController.uploadUser,
   UsersController.edit
+);
+router.delete(
+  "/:id",
+  AuthController.isUserConnected,
+  AuthController.isUserAdmin,
+  UsersController.delete
 );
 
 module.exports = router;

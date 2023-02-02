@@ -163,3 +163,152 @@ $radius: 3px;
     }
   }
 }
+
+@media screen and (min-width: 960px) {
+  .pollcard-container {
+    text-decoration: none;
+    color: $font-white;
+
+    .pollcard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        text-decoration: none;
+        color: $font-white;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          object-fit: cover;
+          padding: 0.5rem;
+        }
+
+        p {
+          text-align: left;
+          margin: 0;
+          a {
+            text-decoration: none;
+            color: $font-white;
+          }
+          span {
+            color: $unselected;
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .follow-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        background-color: $button-background;
+        color: $green;
+        border: none;
+        border-radius: $radius;
+        padding: 0.3rem;
+        cursor: pointer;
+      }
+      .followed {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        gap: 0.2rem;
+        color: $green-dark;
+        margin: 0;
+      }
+    }
+
+    .pollcard-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // padding-bottom: 1rem;
+      .poll-text {
+        width: 90%;
+        background-color: $comment;
+        border-radius: $radius;
+        border: 1px solid $border;
+        padding: 0.8rem;
+        text-align: left;
+        margin: 0;
+      }
+      .pollcard-agree-stats-container {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+
+        p {
+          margin: 0;
+          font-size: 0.8rem;
+        }
+        .agree-count {
+          color: $blue;
+        }
+        .disagree-count {
+          color: $red;
+        }
+        .agreed-text {
+          color: $unselected;
+        }
+      }
+      div {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        p {
+          color: $font-white2;
+          font-size: 0.8rem;
+          margin: 1rem 0 0.3rem 0;
+        }
+      }
+
+      .pollcard-agree-button-container {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+
+        .agree-button,
+        .disagree-button {
+          background: $button-background;
+          border: none;
+          font-size: 1rem;
+          cursor: pointer;
+          padding: 0.2rem 0.5rem;
+          border-radius: $radius;
+          margin: 0.2rem;
+        }
+
+        .agree-button {
+          color: $blue;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .agree {
+            padding-left: 0.5rem;
+          }
+        }
+
+        .disagree-button {
+          color: $red;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .disagree {
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

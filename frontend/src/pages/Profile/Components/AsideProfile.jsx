@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AsideProfile.scss";
 
-export default function AsideProfile({ isOpen, setIsOpen, usersList }) {
+export default function AsideProfile({ isOpen, setIsOpen, usersList, userId }) {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
 
@@ -34,10 +34,7 @@ export default function AsideProfile({ isOpen, setIsOpen, usersList }) {
         <div className="aside-users-list-container">
           {usersList &&
             usersList
-              // .sort(() => {
-              //   if (searchValue === "") return Math.random() - 0.5;
-              //   return null;
-              // })
+              .filter((user) => user.id !== userId)
               .filter(
                 (user) =>
                   user.pseudo

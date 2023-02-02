@@ -25,6 +25,7 @@ const loginForm = (state, action) => {
 };
 export default function Login() {
   const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   const [formData, dispatch] = useReducer(loginForm, formInitialState);
 
@@ -35,7 +36,6 @@ export default function Login() {
       email: formData.email,
       remember: true,
     };
-
     try {
       const userData = await axios
         .post("users/login", userCredit, {
@@ -46,6 +46,7 @@ export default function Login() {
       setUser(userData);
       // alert("Successfully logged in");
       dispatch({ type: "RESET_FORM" });
+
       return navigate("/home?category=Recent");
     } catch (err) {
       return alert(err.response.data);

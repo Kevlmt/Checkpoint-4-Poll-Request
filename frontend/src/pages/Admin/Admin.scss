@@ -4,6 +4,7 @@ $background: #0d131c;
 $background2: rgba(0, 0, 0, 0);
 $green: #4cf47b;
 $green-hover: #27ff64;
+$green-dark: #389753;
 $blue: #33ace0;
 $red: #ff3c3c;
 $unselected: #7b7b7b;
@@ -16,12 +17,12 @@ $button-background: #161b22;
 $button-background-hover: #12161b;
 $radius: 3px;
 
-.home-page {
+.admin-page {
   background: $background;
-}
 
-@media screen and (min-width: 960px) {
-  .home-content {
+  .admin-container {
+    height: calc(100vh - 70px);
     display: flex;
+    width: 100%;
   }
 }

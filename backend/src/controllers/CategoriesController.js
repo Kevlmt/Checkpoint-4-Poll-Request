@@ -37,7 +37,6 @@ class CategoriesController {
       if (modifiedCategory.affectedRows === 0) {
         return res.status(404).send("category not found");
       }
-
       return res.sendStatus(204);
     } catch (err) {
       return res.status(500).send(err.message);

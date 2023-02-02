@@ -1,0 +1,73 @@
+$header-background: #161b22;
+$aside-background: #0d1117;
+$background: #0d131c;
+$background2: rgba(0, 0, 0, 0);
+$green: #4cf47b;
+$green-hover: #00ff48;
+$blue: #33ace0;
+$blue2: #12b8ff;
+$red: #ff3c3c;
+$red2: #ff0a0a;
+$unselected: #7b7b7b;
+$font-white: #ffffff;
+$font-white2: #b7b7b7;
+$border: #4a515a;
+$input: #30363d;
+$comment: #30363d;
+$button-background: #161b22;
+$button-background-hover: #12161b;
+$radius: 3px;
+
+.admin-user-popup {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(48, 54, 61, 0.7);
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .admin-user-popup-content {
+    width: 80%;
+    max-width: 500px;
+    height: 200px;
+    background: $background;
+    border-radius: $radius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      width: 50%;
+      display: flex;
+      justify-content: space-evenly;
+      .admin-button-yes {
+        background-color: $header-background;
+        color: $red;
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        border: none;
+
+        &:hover {
+          color: $red2;
+          cursor: pointer;
+        }
+      }
+      .admin-button-no {
+        background-color: $header-background;
+        color: $green;
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        &:hover {
+          color: $green-hover;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

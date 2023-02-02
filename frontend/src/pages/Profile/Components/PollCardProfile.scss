@@ -32,11 +32,15 @@ $radius: 3px;
       text-align: left;
       padding-left: 0.5rem;
 
-      .pollcard-profile-date {
-        margin: 0;
-        color: $font-white2;
-        font-size: 0.8rem;
+      div {
+        display: flex;
+        justify-content: space-between;
 
+        .pollcard-profile-date {
+          margin: 0;
+          color: $font-white2;
+          font-size: 0.8rem;
+        }
         .pollcard-profile-edit-container {
           .pollcard-profile-edit-button {
             display: flex;

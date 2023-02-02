@@ -22,9 +22,9 @@ $radius: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: $header-background;
 
   .header-title-container {
-    background-color: $header-background;
     width: 100%;
     height: 50px;
     display: flex;
@@ -143,6 +143,9 @@ $radius: 3px;
       display: none;
     }
   }
+  .logout-button-desktop {
+    display: none;
+  }
 }
 
 .comment-page-navback {
@@ -161,6 +164,7 @@ $radius: 3px;
   border: none;
   &:hover {
     color: $green;
+    cursor: pointer;
   }
   .comment-page-back {
     padding: 0;
@@ -169,4 +173,55 @@ $radius: 3px;
 }
 
 @media screen and (min-width: 960px) {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .header-title-container {
+      width: auto;
+      padding-left: 5%;
+      .header-title {
+      }
+
+      .navButton {
+        display: none;
+      }
+      .logout-button {
+        display: none;
+      }
+    }
+    .header-nav-container {
+      width: 50%;
+      background-color: $header-background;
+      .header-nav-navlink {
+        &:hover {
+          color: $green;
+          background-color: $aside-background;
+        }
+        &.active {
+        }
+        .header-nav-button-container {
+        }
+      }
+      .admin {
+        display: block;
+      }
+    }
+    .logout-button-desktop {
+      padding-right: 1rem;
+      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1rem;
+      border: none;
+      background-color: $header-background;
+      color: $font-white2;
+
+      &:hover {
+        cursor: pointer;
+        color: $red;
+      }
+    }
+  }
 }

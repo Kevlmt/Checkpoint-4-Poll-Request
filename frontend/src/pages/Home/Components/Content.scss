@@ -90,3 +90,81 @@ $radius: 3px;
     }
   }
 }
+
+@media screen and (min-width: 960px) {
+  .content-container {
+    height: calc(100vh - 70px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+
+    .polls-list-container {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      padding: 1rem 0 0 0;
+      .polls-ul-container {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 90%;
+        .polls-li-container {
+          padding: 0.5rem 0 0 0;
+          border-bottom: 1px solid $comment;
+        }
+        .last-poll {
+          border: none;
+        }
+      }
+    }
+  }
+  .pollOpened {
+    height: calc(100vh - 180px);
+    overflow: auto;
+  }
+
+  .comment-page-input-container {
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: $aside-background;
+    width: 100%;
+    border-top: 1px solid $comment;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      textarea {
+        background-color: $input;
+        color: $font-white;
+        border-radius: $radius;
+        border: none;
+        box-sizing: border-box;
+        padding: 0.3rem;
+        // height: 100%;
+        width: 70%;
+        resize: none;
+        &:focus {
+          outline: none !important;
+        }
+      }
+
+      button {
+        font-size: 0.9rem;
+        background-color: $button-background;
+        color: $green;
+        border: none;
+        border-radius: $radius;
+        padding: 0.4rem 0.7rem;
+      }
+    }
+  }
+}

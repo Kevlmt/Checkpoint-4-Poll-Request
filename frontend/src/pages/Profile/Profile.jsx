@@ -1,13 +1,13 @@
 /* eslint-disable import/no-unresolved */
 // /* eslint-disable import/no-unresolved */
 // // eslint-disable-next-line import/order
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "@components/Header";
 import PopupProfil from "@pages/Profile/Components/PopupProfil";
 import axios from "@services/axios";
 import AsideProfile from "./Components/AsideProfile";
-import UserContext from "../../contexts/UserContext";
+// import UserContext from "../../contexts/UserContext";
 import "./Profile.scss";
 import ContentProfile from "./Components/ContentProfile";
 
@@ -17,13 +17,10 @@ function useQuery() {
 }
 
 export default function Profile() {
-  const { setUser } = useContext(UserContext);
   const [userInfo, setUserInfo] = useState(null);
   const query = useQuery();
   const { userId } = useParams();
   const [isOpen, setIsOpen] = useState(false);
-
-  const navigate = useNavigate();
 
   const [usersList, setUsersList] = useState(null);
   const fetchUsersList = async () => {
@@ -54,18 +51,6 @@ export default function Profile() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await axios.get("/users/logout", { withCredentials: true }).then(() => {
-        setUser(null);
-        setUserInfo(null);
-        return navigate("/");
-      });
-    } catch (err) {
-      alert(err.reponse.data);
-    }
-  };
-
   useEffect(() => {
     fetchUsersList();
   }, []);
@@ -84,22 +69,18 @@ export default function Profile() {
           userId={userId}
         />
       )}
-      <Header
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        handleLogout={handleLogout}
-      />
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="profile-container">
         <AsideProfile
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           usersList={usersList}
+          userId={parseInt(userId, 10)}
         />
         <ContentProfile
           query={query}
           userInfo={userInfo}
           userId={parseInt(userId, 10)}
-          handleLogout={handleLogout}
         />
       </div>
     </div>

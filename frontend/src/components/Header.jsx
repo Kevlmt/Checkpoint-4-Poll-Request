@@ -99,7 +99,7 @@ export default function Header({
             Chat
           </div>
         </NavLink>
-        <NavLink to={`/profile/${user.id}`} className="header-nav-navlink">
+        <NavLink to={`/profile/${user?.id}`} className="header-nav-navlink">
           <div className="header-nav-button-container">
             <AiOutlineUser size={35} />
             Profile

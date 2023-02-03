@@ -9,12 +9,13 @@ export default function ContentChat({ query, userId }) {
   const userQuery = query.get("user");
   const { socket } = useContext(UserContext);
   const scrollRef = useRef();
-  const [newMessage, setNewMessage] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
   const [messages, setMessages] = useState([]);
-  const fetchMessages = async () => {
+
+  const fetchMessages = async (id = query.get("user")) => {
     const data = await axios
-      .get(`/messages/${query.get("user")}`, {
+      .get(`/messages/${id}`, {
         withCredentials: true,
       })
       .then((response) => response.data);
@@ -24,14 +25,13 @@ export default function ContentChat({ query, userId }) {
   const handleSend = async () => {
     const message = {
       text: newMessage,
-      toId: parseInt(query.get("user"), 10),
+      toId: parseInt(userQuery, 10),
     };
     await axios.post("/messages", message, { withCredentials: true });
 
-    socket.current.emit("send-msg", {
-      toId: parseInt(userQuery, 10),
+    socket.emit("send-msg", {
       fromId: userId,
-      text: newMessage,
+      toId: parseInt(userQuery, 10),
     });
 
     setNewMessage("");
@@ -39,12 +39,18 @@ export default function ContentChat({ query, userId }) {
   };
 
   useEffect(() => {
-    if (socket.current)
-      socket.current.on("msg-recieve", async () => {
-        await fetchMessages();
+    if (socket)
+      socket.on("msg-recieve", (fromId) => {
+        if (fromId === parseInt(userQuery, 10)) {
+          return fetchMessages(fromId);
+        }
         return null;
       });
-  }, []);
+
+    return () => {
+      socket.off("msg-recieve");
+    };
+  }, [socket, userQuery]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });

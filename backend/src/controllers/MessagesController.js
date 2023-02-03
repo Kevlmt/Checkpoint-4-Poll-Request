@@ -11,7 +11,7 @@ class MessagesController {
         toId
       );
       const allMessages = [...messagesSent, ...messagesReceived];
-      return res.status(201).send(allMessages);
+      return res.status(200).send(allMessages);
     } catch (err) {
       return res.status(500).send(err.message);
     }

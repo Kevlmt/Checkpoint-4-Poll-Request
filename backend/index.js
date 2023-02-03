@@ -22,23 +22,23 @@ const io = require("socket.io")(server, {
   },
 });
 
-global.onlineUsers = new Map();
+const onlineUsers = new Map();
 
 io.on("connection", (socket) => {
-  global.chatSocket = socket;
+  // global.chatSocket = socket;
 
   socket.on("add-user", (userId) => {
-    global.onlineUsers.set(userId, socket.id);
+    onlineUsers.set(userId, socket.id);
   });
 
   socket.on("disconnect", (userId) => {
-    global.onlineUsers.delete(userId);
+    onlineUsers.delete(userId);
   });
 
   socket.on("send-msg", (message) => {
-    const sendUserSocket = global.onlineUsers.get(message.toId);
+    const sendUserSocket = onlineUsers.get(message.toId);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recieve");
+      socket.to(sendUserSocket).emit("msg-recieve", message.fromId);
     }
   });
 });

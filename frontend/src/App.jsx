@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/order */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
 import Home from "@pages/Home/Home";
@@ -15,15 +15,20 @@ import Admin from "@pages/Admin/Admin";
 
 function App() {
   const [user, setUser] = useState();
-  const socket = useRef();
+  const [socket, setSocket] = useState(null);
   const checkConnection = async () => {
     try {
+      if (socket) {
+        socket.disconnect();
+      }
       const data = await axios
         .get("/users/refreshToken", {
           withCredentials: true,
         })
         .then((result) => result.data);
-      return setUser(data);
+      setUser(data);
+      const socketServer = io("http://localhost:8000");
+      return setSocket(socketServer);
     } catch (err) {
       return alert(err);
     }
@@ -39,8 +44,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      socket.current = io("http://localhost:8000");
-      socket.current.emit("add-user", user.id);
+      socket.emit("add-user", user.id);
     }
   }, [user]);
 
@@ -50,14 +54,20 @@ function App() {
       <UserContext.Provider value={{ user, setUser, socket }}>
         <Router>
           <Routes>
-            <Route path="/" element={user ? <Home /> : <Login />} />
-            {user && <Route path="/home" element={<Home />} />}
-            {user && <Route path="/chat" element={<Chat />} />}
-            {user && <Route path="/profile/:userId" element={<Profile />} />}
             {!user && <Route path="/login" element={<Login />} />}
             {!user && <Route path="/register" element={<Register />} />}
-            {user && user.role === "ADMIN" && (
-              <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={socket && user ? <Home /> : <Login />} />
+            {socket && (
+              <>
+                {user && <Route path="/home" element={<Home />} />}
+                {user && <Route path="/chat" element={<Chat />} />}
+                {user && (
+                  <Route path="/profile/:userId" element={<Profile />} />
+                )}
+                {user && user.role === "ADMIN" && (
+                  <Route path="/admin" element={<Admin />} />
+                )}
+              </>
             )}
           </Routes>
         </Router>
